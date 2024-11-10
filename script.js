@@ -29,7 +29,8 @@ optionImages.forEach((image, index) => {
             }
         });
 
-
+        userResult.classList.remove('no-rotate');
+        cpuResult.classList.remove('no-rotate');
         userResult.src = cpuResult.src = 'images/rock.png';
         result.textContent = 'Wait...';
         console.log("Images reset to default, waiting for result...");
@@ -42,6 +43,10 @@ optionImages.forEach((image, index) => {
 
 
             const userImage = e.target.querySelector('img');
+            const userImageSrc = userImage.src;
+            if (userImageSrc.includes('lizard') || userImageSrc.includes('spoke')) {
+                userResult.classList.add('no-rotate');
+            }
             userResult.src = userImage.src;
             console.log("User selected:", userImage.src);
 
@@ -49,15 +54,12 @@ optionImages.forEach((image, index) => {
 
             const randomIndex = Math.floor(Math.random() * 5);
             const cpuImageSrc = cpuImages[randomIndex];
+            if (cpuImageSrc.includes('lizard') || cpuImageSrc.includes('spoke')) {
+                cpuResult.classList.add('no-rotate');
+            }
             cpuResult.src = cpuImageSrc;
             console.log("CPU selected:", cpuImageSrc);
 
-            // Добавляем или убираем класс .no-rotate для CPU
-            if (cpuImageSrc.includes('lizard')) {
-                cpuResult.classList.add('no-rotate');
-            } else {
-                cpuResult.classList.remove('no-rotate');
-            }
 
 
             const userValue = ["R", "P", "S", "L", 'Sp'][index];
@@ -71,6 +73,9 @@ optionImages.forEach((image, index) => {
 
             result.textContent = outcome === "Draw" ? "Match Draw" : `${outcome} Won!`;
             console.log("Final result displayed:", result.textContent);
+
+
+
 
         }, 2500);
     });

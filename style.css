@@ -30,11 +30,14 @@ body{
     display: flex;
     column-gap: 100px;
 }
-.user_result img{
+.user_result img:not(.no-rotate){
     transform: rotate(90deg);
 }
-.cpu_result img{
+.cpu_result img:not(.no-rotate){
     transform: rotate(-90deg) rotateY(180deg);
+}
+.cpu_result .no-rotate{
+    transform: rotateY(180deg);
 }
 .result{
     text-align: center;
